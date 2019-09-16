@@ -1,20 +1,54 @@
 package za.co.wethinkcode.classes;
-
+import za.co.wethinkcode.interfaces.Flyable;
 public class Baloon extends Aircraft implements Flyable
 {
     private WeatherTower    weatherTower;
 
     public Baloon(String name, Coordinates coords)
     {
-        this.name = name;
-        this.coordinates = coords;
+        super((name), coords);
     }
 
-    protected void updateConditions() {
+    @Override
+    public void updateConditions() 
+    {
+        int         height;
+        int         longitude;
+        int         latitude;
+        String      currentWeather;
+
+        height = this.coordinates.getHeight();
+        longitude = this.coordinates.getLongitude();
+        latitude = this.coordinates.getLatitude();
+        currentWeather= this.weatherTower.getWeather(this.coordinates);
         
-    }
+        if (currentWeather.compareTo("SUN") == 0 ){
+            this.coordinates.setLongitude(longitude + 2);
+            this.coordinates.setHeight(height + 4);
+        }
+        else if (currentWeather.compareTo("RAIN") == 0) {
+            this.coordinates.setLongitude( longitude + 5);
+        }
+        else if (currentWeather.compareTo("FOG") == 0) {
+            this.coordinates.setLongitude( longitude + 1 );
+        }
+        else if (currentWeather.compareTo("SNOW") == 0) {
+            this.coordinates.setHeight( height + 15 );
+        }
 
+        if (this.coordinates.getHeight() > 100) {
+            this.coordinates.setHeight((100));;
+        }
+        
+        if (this.coordinates.getHeight() < 0)
+        {
+            this.coordinates.setHeight(0);
+        }
+    }   
+
+    @Override
     public void registerTower(WeatherTower weatherTower) {
-        
+        this.weatherTower = weatherTower;
     }
+
 }

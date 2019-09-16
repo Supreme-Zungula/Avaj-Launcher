@@ -1,18 +1,23 @@
 package za.co.wethinkcode.classes;
-import java.io.*;
+import za.co.wethinkcode.classes.Coordinates;
 
-public class Aircraft{
+public class Aircraft {
     protected long          id;
     protected String        name;
-    protected Codrdinates   coordinates;
+    protected Coordinates   coordinates;
     private long            idCounter;
+
     protected Aircraft(String name, Coordinates coords)
     {
         this.name = name;
         this.coordinates = coords;
+        this.id = nextId();
     }
-
-    long nextIf() {
-        return (this.idCounter);    
+    public long getId(){
+        return (id);
+    }
+    
+    private long nextId() {
+        return (++idCounter);    
     }
 }

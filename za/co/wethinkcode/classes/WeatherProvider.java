@@ -6,7 +6,12 @@ public class WeatherProvider
     private String[]            weather;
     
     private WeatherProvider(){
+        weatherProvider = new WeatherProvider();
 
+        this.weather[0] = "RAIN";
+        this.weather[1] = "FOG";
+        this.weather[1] = "SUN";
+        this.weather[1] = "SNOW";
     }
     
     public WeatherProvider getProvider()
@@ -16,6 +21,7 @@ public class WeatherProvider
 
     public String getCurrentWeather(Coordinates coords)
     {
-        
+        WeatherTower weatherStation = new WeatherTower();
+        return (weatherStation.getWeather(coords));
     }
 }
