@@ -5,8 +5,7 @@ public class Tower
 {
     private ArrayList<Flyable>    observers;
 
-
-    Tower(){
+    Tower() {
         observers = new ArrayList<Flyable>();
     }
 

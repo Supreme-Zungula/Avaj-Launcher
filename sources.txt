@@ -6,7 +6,6 @@
 ./za/co/wethinkcode/classes/JetPlane.java
 ./za/co/wethinkcode/classes/Coordinates.java
 ./za/co/wethinkcode/classes/Helicopter.java
-./za/co/wethinkcode/exceptions/InvalidFileException.java
 ./za/co/wethinkcode/SimulatorTest.java
 ./za/co/wethinkcode/factories/AircraftFactory.java
 ./za/co/wethinkcode/interfaces/Flyable.java

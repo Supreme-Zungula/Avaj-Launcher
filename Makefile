@@ -5,6 +5,3 @@ SRC_FILE = sources.txt
 all:
 	find . -name "*.java" > sources.txt
 	javac -sourcepath . @$(SRC_FILE)
-
-clean:
-	find . -name "*.class" 

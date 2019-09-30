@@ -1,5 +1,6 @@
 package za.co.wethinkcode.classes;
 import za.co.wethinkcode.interfaces.Flyable;
+import java.io.FileWriter;
 
 public class Helicopter extends Aircraft implements Flyable
 {
@@ -13,13 +14,11 @@ public class Helicopter extends Aircraft implements Flyable
     public void updateConditions() {
         int         height;
         int         longitude;
-        int         latitude;
         String      currentWeather;
         
         currentWeather = this.weatherTower.getWeather(this.coordinates);
         height = this.coordinates.getHeight();
         longitude = this.coordinates.getLongitude();
-        latitude = this.coordinates.getLatitude();
 
         if (currentWeather.compareTo("SUN") == 0) {
             this.coordinates.setLongitude(longitude + 10);
@@ -39,13 +38,22 @@ public class Helicopter extends Aircraft implements Flyable
             this.coordinates.setHeight((100));;
         }
         
-        if (this.coordinates.getHeight() < 0)
+        if (this.coordinates.getHeight() <= 0)
         {
             this.coordinates.setHeight(0);
+            this.weatherTower.unregister(this);
         }
     }
 
     public void registerTower(WeatherTower weatherTower) {
         this.weatherTower = weatherTower;
+        try {
+            FileWriter fileWriter = new FileWriter("../simulation.txt");
+            fileWriter.append("Tower says: Registered Baloon {id: " + this.id + "}\n");
+            fileWriter.close();
+        }
+        catch (Exception ex) {
+            System.out.println(ex);
+        }
     }
 }

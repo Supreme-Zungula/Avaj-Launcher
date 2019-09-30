@@ -1,4 +1,6 @@
 package za.co.wethinkcode.classes;
+import java.io.FileWriter;
+
 import za.co.wethinkcode.interfaces.Flyable;
 public class Baloon extends Aircraft implements Flyable
 {
@@ -14,12 +16,10 @@ public class Baloon extends Aircraft implements Flyable
     {
         int         height;
         int         longitude;
-        int         latitude;
         String      currentWeather;
 
         height = this.coordinates.getHeight();
         longitude = this.coordinates.getLongitude();
-        latitude = this.coordinates.getLatitude();
         currentWeather= this.weatherTower.getWeather(this.coordinates);
         
         if (currentWeather.compareTo("SUN") == 0 ){
@@ -40,15 +40,34 @@ public class Baloon extends Aircraft implements Flyable
             this.coordinates.setHeight((100));;
         }
         
-        if (this.coordinates.getHeight() < 0)
+        if (this.coordinates.getHeight() <= 0)
         {
             this.coordinates.setHeight(0);
+            this.weatherTower.unregister(this);
+
+            try {
+                FileWriter fileWriter = new FileWriter("../simulation.txt");
+                fileWriter.append("Tower says: unregistered Baloon {id: " + this.id + "}\n");
+                fileWriter.close();
+            }
+            catch (Exception ex) {
+                System.out.println(ex);
+            }
         }
     }   
 
     @Override
     public void registerTower(WeatherTower weatherTower) {
         this.weatherTower = weatherTower;
+
+        try {
+            FileWriter fileWriter = new FileWriter("../simulation.txt");
+            fileWriter.append("Tower says: Registered Baloon {id: " + this.id + "}\n");
+            fileWriter.close();
+        }
+        catch (Exception ex) {
+            System.out.println(ex);
+        }
     }
 
 }

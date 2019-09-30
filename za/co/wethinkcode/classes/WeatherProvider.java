@@ -1,27 +1,39 @@
 package za.co.wethinkcode.classes;
+import java.util.Random;
 
 public class WeatherProvider
 {
-    private WeatherProvider     weatherProvider;
-    private String[]            weather;
+    private static WeatherProvider weatherProvider = new WeatherProvider();
+    private String[]            weather = { "RAIN", "FOG", "SUN", "SNOW" };
     
-    private WeatherProvider(){
-        weatherProvider = new WeatherProvider();
-
-        this.weather[0] = "RAIN";
-        this.weather[1] = "FOG";
-        this.weather[1] = "SUN";
-        this.weather[1] = "SNOW";
+    private WeatherProvider() {
+        
     }
     
-    public WeatherProvider getProvider()
+    public static WeatherProvider getProvider()
     {
-        return (this.weatherProvider);
+        return (weatherProvider);
     }
 
     public String getCurrentWeather(Coordinates coords)
     {
-        WeatherTower weatherStation = new WeatherTower();
-        return (weatherStation.getWeather(coords));
+        String  currentWeather;
+        Random rand = new Random();
+        int randNum = rand.nextInt(coords.getHeight());
+
+        if (randNum >= 0 && randNum <= 20) {
+            currentWeather = weather[0];
+        }
+        else if (randNum > 20 && randNum <= 40) {
+            currentWeather = weather[1];
+        }
+        else if (randNum > 40 && randNum <= 60) {
+            currentWeather = weather[2];
+        }
+        else {
+            currentWeather = weather[3];
+        }
+
+        return (currentWeather);
     }
 }
