@@ -18,7 +18,7 @@ public class AircraftFactory
         Coordinates position = new Coordinates(longitude, latitude, height);
         Flyable airCraft;
         
-        if (type.compareTo("Jetplane") == 0)
+        if (type.compareTo("JetPlane") == 0)
         {
           airCraft = new JetPlane(name, position);
         }

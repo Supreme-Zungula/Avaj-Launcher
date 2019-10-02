@@ -38,8 +38,14 @@ public class SimulatorTest
         int height = Integer.parseInt(aStrings[4]);
         
         return (factory.newAircraft(type, name, longitude, latitude, height));
-    } 
-    
+    }
+
+    public static void runSimulation(int numRuns, ArrayList<Flyable> alistFlyable)
+    {
+        for (Flyable  flyable : alistFlyable) {
+            System.out.println(flyable);
+        }
+    }
     public static void main(String[] args) {
         int     simNumber;
         int     lineRead = 0;
@@ -69,6 +75,7 @@ public class SimulatorTest
                 }    
             }
             bufferReader.close();
+            runSimulation(simNumber, flyablesList);
         } catch (Exception exception) {
             System.out.println("Invalid scenerio at line " + lineRead);
             System.out.println(exception.toString());
