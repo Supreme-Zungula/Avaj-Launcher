@@ -1,4 +1,5 @@
 package za.co.wethinkcode;
+import za.co.wethinkcode.classes.WeatherTower;
 import za.co.wethinkcode.factories.AircraftFactory;
 import za.co.wethinkcode.interfaces.Flyable;
 import java.io.*;
@@ -42,8 +43,11 @@ public class SimulatorTest
 
     public static void runSimulation(int numRuns, ArrayList<Flyable> alistFlyable)
     {
+        WeatherTower weatherTower = new WeatherTower();
+
+        System.out.println("alistFlyables size = " + alistFlyable.size() + '\n' );
         for (Flyable  flyable : alistFlyable) {
-            System.out.println(flyable);
+            weatherTower.register(flyable);
         }
     }
     public static void main(String[] args) {

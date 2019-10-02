@@ -6,6 +6,7 @@
 ./za/co/wethinkcode/classes/Tower.java
 ./za/co/wethinkcode/classes/WeatherTower.java
 ./za/co/wethinkcode/classes/WeatherProvider.java
+./za/co/wethinkcode/classes/SimulationWriter.java
 ./za/co/wethinkcode/classes/Baloon.java
 ./za/co/wethinkcode/classes/Helicopter.java
 ./za/co/wethinkcode/interfaces/Flyable.java
