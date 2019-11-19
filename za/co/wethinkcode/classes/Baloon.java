@@ -1,5 +1,9 @@
 package za.co.wethinkcode.classes;
+<<<<<<< HEAD
 
+=======
+import za.co.wethinkcode.classes.SimulationWriter;
+>>>>>>> 4ac031ada69fa9f55d2c5a48b372cb97ff8a264a
 import za.co.wethinkcode.interfaces.Flyable;
 import za.co.wethinkcode.classes.SimulationWriter;
 
@@ -45,15 +49,22 @@ public class Baloon extends Aircraft implements Flyable
         {
             this.coordinates.setHeight(0);
             this.weatherTower.unregister(this);
+<<<<<<< HEAD
             
             String message = "Tower says: unregistered Baloon {id: " + this.id + "}\n";
             SimulationWriter.writeToFile("../simulation.txt", message);
+=======
+            SimulationWriter.writeMessage("../simulation.txt", "Baloon says: Landed safely\n");
+>>>>>>> 4ac031ada69fa9f55d2c5a48b372cb97ff8a264a
         }
     }   
 
     @Override
     public void registerTower(WeatherTower weatherTower) {
         this.weatherTower = weatherTower;
+<<<<<<< HEAD
+=======
+        SimulationWriter.writeMessage("../simulation.txt", "Tower says: Registered Baloon {id: " + this.id + "}\n");
+>>>>>>> 4ac031ada69fa9f55d2c5a48b372cb97ff8a264a
     }
-
 }

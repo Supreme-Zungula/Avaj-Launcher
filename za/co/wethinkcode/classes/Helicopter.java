@@ -1,6 +1,5 @@
 package za.co.wethinkcode.classes;
 import za.co.wethinkcode.interfaces.Flyable;
-import java.io.FileWriter;
 
 public class Helicopter extends Aircraft implements Flyable
 {

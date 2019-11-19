@@ -1,5 +1,9 @@
 package za.co.wethinkcode;
+<<<<<<< HEAD
 
+=======
+import za.co.wethinkcode.classes.WeatherTower;
+>>>>>>> 4ac031ada69fa9f55d2c5a48b372cb97ff8a264a
 import za.co.wethinkcode.factories.AircraftFactory;
 import za.co.wethinkcode.interfaces.Flyable;
 import java.io.*;
@@ -39,6 +43,7 @@ public class SimulatorTest {
         return (factory.newAircraft(type, name, longitude, latitude, height));
     }
 
+<<<<<<< HEAD
     public static void runSimulation(int runs, ArrayList<Flyable> alistFlyables) {
         for (Flyable flyable : alistFlyables) {
             System.out.println(flyable.toString());
@@ -47,6 +52,17 @@ public class SimulatorTest {
         }
     }
 
+=======
+    public static void runSimulation(int numRuns, ArrayList<Flyable> alistFlyable)
+    {
+        WeatherTower weatherTower = new WeatherTower();
+
+        System.out.println("alistFlyables size = " + alistFlyable.size() + '\n' );
+        for (Flyable  flyable : alistFlyable) {
+            weatherTower.register(flyable);
+        }
+    }
+>>>>>>> 4ac031ada69fa9f55d2c5a48b372cb97ff8a264a
     public static void main(String[] args) {
         int simNumber;
         int lineRead = 1;

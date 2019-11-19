@@ -1,7 +1,6 @@
 package za.co.wethinkcode.factories;
-import java.lang.Exception;
 
-import za.co.wethinkcode.classes.Aircraft;
+import java.lang.Exception;
 import za.co.wethinkcode.classes.Baloon;
 import za.co.wethinkcode.classes.Coordinates;
 import za.co.wethinkcode.classes.JetPlane;

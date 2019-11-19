@@ -1,12 +1,20 @@
+<<<<<<< HEAD
 ./za/co/wethinkcode/classes/WeatherTower.java
 ./za/co/wethinkcode/classes/Tower.java
 ./za/co/wethinkcode/classes/SimulationWriter.java
 ./za/co/wethinkcode/classes/Baloon.java
 ./za/co/wethinkcode/classes/WeatherProvider.java
+=======
+./za/co/wethinkcode/factories/AircraftFactory.java
+./za/co/wethinkcode/SimulatorTest.java
+./za/co/wethinkcode/classes/Coordinates.java
+>>>>>>> 4ac031ada69fa9f55d2c5a48b372cb97ff8a264a
 ./za/co/wethinkcode/classes/Aircraft.java
 ./za/co/wethinkcode/classes/JetPlane.java
-./za/co/wethinkcode/classes/Coordinates.java
+./za/co/wethinkcode/classes/Tower.java
+./za/co/wethinkcode/classes/WeatherTower.java
+./za/co/wethinkcode/classes/WeatherProvider.java
+./za/co/wethinkcode/classes/SimulationWriter.java
+./za/co/wethinkcode/classes/Baloon.java
 ./za/co/wethinkcode/classes/Helicopter.java
-./za/co/wethinkcode/SimulatorTest.java
-./za/co/wethinkcode/factories/AircraftFactory.java
 ./za/co/wethinkcode/interfaces/Flyable.java
