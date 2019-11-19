@@ -47,13 +47,5 @@ public class Helicopter extends Aircraft implements Flyable
 
     public void registerTower(WeatherTower weatherTower) {
         this.weatherTower = weatherTower;
-        try {
-            FileWriter fileWriter = new FileWriter("../simulation.txt");
-            fileWriter.append("Tower says: Registered Baloon {id: " + this.id + "}\n");
-            fileWriter.close();
-        }
-        catch (Exception ex) {
-            System.out.println(ex);
-        }
     }
 }

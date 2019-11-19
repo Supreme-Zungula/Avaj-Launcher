@@ -1,7 +1,8 @@
 package za.co.wethinkcode.classes;
-import java.io.FileWriter;
 
 import za.co.wethinkcode.interfaces.Flyable;
+import za.co.wethinkcode.classes.SimulationWriter;
+
 public class Baloon extends Aircraft implements Flyable
 {
     private WeatherTower    weatherTower;
@@ -44,30 +45,15 @@ public class Baloon extends Aircraft implements Flyable
         {
             this.coordinates.setHeight(0);
             this.weatherTower.unregister(this);
-
-            try {
-                FileWriter fileWriter = new FileWriter("../simulation.txt");
-                fileWriter.append("Tower says: unregistered Baloon {id: " + this.id + "}\n");
-                fileWriter.close();
-            }
-            catch (Exception ex) {
-                System.out.println(ex);
-            }
+            
+            String message = "Tower says: unregistered Baloon {id: " + this.id + "}\n";
+            SimulationWriter.writeToFile("../simulation.txt", message);
         }
     }   
 
     @Override
     public void registerTower(WeatherTower weatherTower) {
         this.weatherTower = weatherTower;
-
-        try {
-            FileWriter fileWriter = new FileWriter("../simulation.txt");
-            fileWriter.append("Tower says: Registered Baloon {id: " + this.id + "}\n");
-            fileWriter.close();
-        }
-        catch (Exception ex) {
-            System.out.println(ex);
-        }
     }
 
 }

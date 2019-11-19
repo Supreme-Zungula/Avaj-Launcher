@@ -19,7 +19,7 @@ public class WeatherProvider
     {
         String  currentWeather;
         Random rand = new Random();
-        int randNum = rand.nextInt(coords.getHeight());
+        int randNum = rand.nextInt(coords.getHeight() + 10);
 
         if (randNum >= 0 && randNum <= 20) {
             currentWeather = weather[0];

@@ -1,5 +1,7 @@
 package za.co.wethinkcode.factories;
 import java.lang.Exception;
+
+import za.co.wethinkcode.classes.Aircraft;
 import za.co.wethinkcode.classes.Baloon;
 import za.co.wethinkcode.classes.Coordinates;
 import za.co.wethinkcode.classes.JetPlane;
@@ -18,7 +20,7 @@ public class AircraftFactory
         Coordinates position = new Coordinates(longitude, latitude, height);
         Flyable airCraft;
         
-        if (type.compareTo("Jetplane") == 0)
+        if (type.compareTo("JetPlane") == 0)
         {
           airCraft = new JetPlane(name, position);
         }
