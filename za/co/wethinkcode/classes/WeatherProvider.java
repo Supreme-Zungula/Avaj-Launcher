@@ -1,6 +1,6 @@
 package za.co.wethinkcode.classes;
-import java.util.Random;
 
+import java.util.Random;
 public class WeatherProvider
 {
     private static WeatherProvider weatherProvider = new WeatherProvider();
@@ -19,7 +19,7 @@ public class WeatherProvider
     {
         String  currentWeather;
         Random rand = new Random();
-        int randNum = rand.nextInt(coords.getHeight() + 10);
+        int randNum = rand.nextInt(coords.getHeight() +  coords.getLatitude() + coords.getLongitude());
 
         if (randNum >= 0 && randNum <= 20) {
             currentWeather = weather[0];

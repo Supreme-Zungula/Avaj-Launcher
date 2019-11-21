@@ -2,56 +2,48 @@ package za.co.wethinkcode.classes;
 
 import za.co.wethinkcode.interfaces.Flyable;
 import za.co.wethinkcode.classes.SimulationWriter;
+import java.util.HashMap;
 
 public class JetPlane extends Aircraft implements Flyable {
     private WeatherTower weatherTower;
 
     public JetPlane(String name, Coordinates coords) {
         super(name, coords);
+        this.weatherTower = new WeatherTower();
     }
 
     @Override
     public void updateConditions() {
-        int height;
-        int latitude;
-        String currentWeather;
+        String currentWeather = this.weatherTower.getWeather(this.coordinates);
+        HashMap<String, String> messagesHash = new HashMap<String, String>();
 
-        currentWeather = this.weatherTower.getWeather(this.coordinates);
-        height = this.coordinates.getHeight();
-        latitude = this.coordinates.getLatitude();
+        messagesHash.put("SUN", "Ah sunny skies, I guess I can go supersonic.");
+        messagesHash.put("RAIN", "It's raining I must slow down.");
+        messagesHash.put("SNOW", "It's snowing, I can't fly in such a weather.");
+        messagesHash.put("FOG", "Eish it's so foggy I can't see anything.");
 
-        if (currentWeather.compareTo("SUN") == 0) {
-            this.coordinates.setLatitude(latitude + 10);
-            this.coordinates.setHeight(height + 2);
-        } else if (currentWeather.compareTo("RAIN") == 0) {
-            this.coordinates.setLatitude(latitude + 5);
-        } else if (currentWeather.compareTo("FOG") == 0) {
-            this.coordinates.setLatitude(latitude + 1);
-        } else if (currentWeather.compareTo("SNOW") == 0) {
-            this.coordinates.setHeight(height + 7);
+        if (currentWeather.equals("SUN")) {
+            this.coordinates.setLongitude(this.coordinates.getLongitude() + 10);
+            this.coordinates.setHeight(this.coordinates.getHeight() + 2);
+        } else if (currentWeather.equals("RAIN")) {
+            this.coordinates.setLongitude(this.coordinates.getLongitude() + 5);
+        } else if (currentWeather.equals("FOG")) {
+            this.coordinates.setLongitude(this.coordinates.getLongitude() + 1);
+        } else if (currentWeather.equals("SNOW")) {
+            this.coordinates.setHeight(this.coordinates.getHeight() + 12);
+        } else {
+            return;
+            // throw new Exception("ERROR: Invalid weather type.");
         }
 
-        if (this.coordinates.getHeight() > 100) {
-            this.coordinates.setHeight((100));
-            ;
-        }
-
-        if (this.coordinates.getHeight() <= 0) {
-            this.coordinates.setHeight(0);
-            this.weatherTower.unregister(this);
-            String message = "Tower says: unregistered Baloon {id: " + this.id + "}\n";
-            SimulationWriter.writeToFile("../simulation.txt", message);
-        }
+        String message = "JetPlane#" + this.name + " (" + this.id + "): " + messagesHash.get(currentWeather);
+        SimulationWriter.writeToFile("SimulationLog.txt", message);
     }
 
     @Override
     public void registerTower(WeatherTower weatherTower) {
         this.weatherTower = weatherTower;
-        String message = "Tower says: Registered Baloon {id: " + this.id + "}\n";
-        SimulationWriter.writeToFile("../simulation.txt", message);
+        String message = "Tower says: " + "JetPlane#" + this.name + " (" + this.id + "): " + "Registered to the tower.";
+        SimulationWriter.writeToFile("SimulationLog.txt", message);
     }
-    /*
-     * @Override public String toString() { String details = "Name: " + name + "\n"
-     * + "Coordinates: " + this.coordinates; return (details); }
-     */
 }

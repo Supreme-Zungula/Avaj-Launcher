@@ -1,16 +1,17 @@
 package za.co.wethinkcode.classes;
+
 import za.co.wethinkcode.interfaces.Flyable;
 import java.util.ArrayList;
-public class Tower
-{
-    private ArrayList<Flyable>    observers;
+
+public class Tower {
+    private ArrayList<Flyable> observers;
 
     Tower() {
         observers = new ArrayList<Flyable>();
     }
 
     public void register(Flyable flyable) {
-        if (observers.contains(flyable) == false){
+        if (observers.contains(flyable) == false) {
             observers.add(flyable);
         }
     }
@@ -22,9 +23,8 @@ public class Tower
     }
 
     protected void conditionsChanged() {
-        for (Flyable flyable :  observers)
-        {
+        for (Flyable flyable : observers) {
             flyable.updateConditions();
-        }   
+        }
     }
 }

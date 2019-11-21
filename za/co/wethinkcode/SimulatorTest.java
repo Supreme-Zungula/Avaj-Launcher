@@ -1,16 +1,12 @@
 package za.co.wethinkcode;
-<<<<<<< HEAD
 
-=======
-import za.co.wethinkcode.classes.WeatherTower;
->>>>>>> 4ac031ada69fa9f55d2c5a48b372cb97ff8a264a
+import java.util.ArrayList;
+import java.io.*;
 import za.co.wethinkcode.factories.AircraftFactory;
 import za.co.wethinkcode.interfaces.Flyable;
-import java.io.*;
-import java.util.ArrayList;
-
-import za.co.wethinkcode.classes.Aircraft;
 import za.co.wethinkcode.classes.SimulationWriter;
+import za.co.wethinkcode.classes.WeatherTower;;
+// import za.co.wethinkcode.classes.WeatherProvider;
 
 public class SimulatorTest {
     public static boolean checkLine(String line) throws Exception {
@@ -43,31 +39,11 @@ public class SimulatorTest {
         return (factory.newAircraft(type, name, longitude, latitude, height));
     }
 
-<<<<<<< HEAD
-    public static void runSimulation(int runs, ArrayList<Flyable> alistFlyables) {
-        for (Flyable flyable : alistFlyables) {
-            System.out.println(flyable.toString());
-            // System.out.println("Updating weather conditions");
-            // flyable.updateConditions();
-        }
-    }
-
-=======
-    public static void runSimulation(int numRuns, ArrayList<Flyable> alistFlyable)
-    {
-        WeatherTower weatherTower = new WeatherTower();
-
-        System.out.println("alistFlyables size = " + alistFlyable.size() + '\n' );
-        for (Flyable  flyable : alistFlyable) {
-            weatherTower.register(flyable);
-        }
-    }
->>>>>>> 4ac031ada69fa9f55d2c5a48b372cb97ff8a264a
     public static void main(String[] args) {
         int simNumber;
         int lineRead = 1;
         ArrayList<Flyable> flyablesList;
-
+        WeatherTower weatherTower = new WeatherTower();
         try {
             File scenerioFile = new File(args[0]);
             FileReader fileReader = new FileReader(scenerioFile);
@@ -78,25 +54,32 @@ public class SimulatorTest {
             line = bufferReader.readLine();
             simNumber = Integer.parseInt(line);
             System.out.println("number = " + simNumber);
-            SimulationWriter.writeToFile("Test.txt", line);
+            // SimulationWriter.writeToFile("Test.txt", line);
 
             while ((line = bufferReader.readLine()) != null) {
                 lineRead++;
-                SimulationWriter.writeToFile("Test.txt", line);
+                // SimulationWriter.writeToFile("Test.txt", line);
                 if (line.isEmpty())
                     continue;
                 if (checkLine(line)) {
-                    flyablesList.add(makeFlyable(line));
+                    Flyable newFlyable = makeFlyable(line);
+                    weatherTower.register(newFlyable);
+                    newFlyable.registerTower(weatherTower);
+                    flyablesList.add(newFlyable);
                 } else {
                     throw new Exception("Invalid input");
                 }
             }
             bufferReader.close();
-            runSimulation(simNumber, flyablesList);
+            while (simNumber > 0) {
+                weatherTower.changeWeather();
+                --simNumber;
+            }
         } catch (Exception exception) {
             System.out.println("Invalid scenerio at line " + lineRead);
             System.out.println(exception.getMessage());
         }
+
     }
 
 }

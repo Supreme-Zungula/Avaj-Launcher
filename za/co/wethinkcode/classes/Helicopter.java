@@ -1,4 +1,6 @@
 package za.co.wethinkcode.classes;
+
+import java.util.HashMap;
 import za.co.wethinkcode.interfaces.Flyable;
 
 public class Helicopter extends Aircraft implements Flyable
@@ -8,43 +10,42 @@ public class Helicopter extends Aircraft implements Flyable
     public Helicopter(String name, Coordinates coords)
     {
         super(name, coords);
+        weatherTower = new WeatherTower();
     }
 
+
+    @Override
     public void updateConditions() {
-        int         height;
-        int         longitude;
-        String      currentWeather;
-        
-        currentWeather = this.weatherTower.getWeather(this.coordinates);
-        height = this.coordinates.getHeight();
-        longitude = this.coordinates.getLongitude();
+        String currentWeather = this.weatherTower.getWeather(this.coordinates);
+        HashMap<String, String> messagesHash = new HashMap<String, String>();
 
-        if (currentWeather.compareTo("SUN") == 0) {
-            this.coordinates.setLongitude(longitude + 10);
-            this.coordinates.setHeight( height + 2 );
-        }
-        else if (currentWeather.compareTo("RAIN") == 0) {
-            this.coordinates.setLongitude( longitude + 5 );
-        }
-        else if (currentWeather.compareTo("FOG") == 0) {
-            this.coordinates.setLongitude( longitude + 1 );
-        }
-        else if (currentWeather.compareTo("SNOW") == 0) {
-            this.coordinates.setHeight( height + 12 );
+        messagesHash.put("SUN", "All sunny skies today.");
+        messagesHash.put("RAIN", "Damn this rain is too much. I need to land");
+        messagesHash.put("SNOW", "It's snowing, this not a weather for helicopters to fly.");
+        messagesHash.put("FOG", "Eish it's so foggy I can't see anything.");
+
+        if (currentWeather.equals("SUN")) {
+            this.coordinates.setLongitude(this.coordinates.getLongitude() + 10);
+            this.coordinates.setHeight(this.coordinates.getHeight() + 2);
+        } else if (currentWeather.equals("RAIN")) {
+            this.coordinates.setLongitude(this.coordinates.getLongitude() + 5);
+        } else if (currentWeather.equals("FOG")) {
+            this.coordinates.setLongitude(this.coordinates.getLongitude() + 1);
+        } else if (currentWeather.equals("SNOW")) {
+            this.coordinates.setHeight(this.coordinates.getHeight() + 12);
+        } else {
+            return;
+            // throw new Exception("ERROR: Invalid weather type.");
         }
 
-        if (this.coordinates.getHeight() > 100) {
-            this.coordinates.setHeight((100));;
-        }
-        
-        if (this.coordinates.getHeight() <= 0)
-        {
-            this.coordinates.setHeight(0);
-            this.weatherTower.unregister(this);
-        }
+        String message = "Helicopter#" + this.name + " (" + this.id + "): " + messagesHash.get(currentWeather);
+        SimulationWriter.writeToFile("SimulationLog.txt", message);
     }
 
+    @Override
     public void registerTower(WeatherTower weatherTower) {
         this.weatherTower = weatherTower;
+        String message = "Tower says: " + "Helicopter#" + this.name + " (" + this.id + "): " + "Registered to the tower.";
+        SimulationWriter.writeToFile("SimulationLog.txt", message);
     }
 }
